@@ -1,21 +1,17 @@
 import { defineConfig } from 'vitepress'
 import { readdirSync } from 'fs'
-import { join, dirname } from 'path'
-import { fileURLToPath } from 'url'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
+import { resolve } from 'path'
 
 // 自动扫描 posts 目录生成侧边栏
 function getPosts() {
-  const postsDir = join(__dirname, '../../posts')
-  try {
-    return readdirSync(postsDir)
-      .filter(f => f.endsWith('.md') && f !== 'index.md')
-      .map(f => ({
-        text: f.replace('.md', ''),
-        link: `/posts/${f.replace('.md', '')}`
-      }))
-  } catch { return [] }
+  // VitePress 构建时 cwd 就是项目根目录
+  const postsDir = resolve('docs/posts')
+  return readdirSync(postsDir)
+    .filter(f => f.endsWith('.md') && f !== 'index.md')
+    .map(f => ({
+      text: f.replace('.md', ''),
+      link: `/posts/${f.replace('.md', '')}`
+    }))
 }
 
 export default defineConfig({

@@ -1,4 +1,22 @@
 import { defineConfig } from 'vitepress'
+import { readdirSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+// 自动扫描 posts 目录生成侧边栏
+function getPosts() {
+  const postsDir = join(__dirname, '../../posts')
+  try {
+    return readdirSync(postsDir)
+      .filter(f => f.endsWith('.md') && f !== 'index.md')
+      .map(f => ({
+        text: f.replace('.md', ''),
+        link: `/posts/${f.replace('.md', '')}`
+      }))
+  } catch { return [] }
+}
 
 export default defineConfig({
   title: "吉加的小小站",
@@ -17,10 +35,7 @@ export default defineConfig({
       '/posts/': [
         {
           text: '文章列表',
-          items: [
-            { text: 'Ma2主要知识点', link: '/posts/ma2-knowledge' },
-            { text: 'Hello World', link: '/posts/hello-world' }
-          ]
+          items: getPosts()
         }
       ]
     },

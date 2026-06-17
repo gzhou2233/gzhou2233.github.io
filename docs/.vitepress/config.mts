@@ -1,17 +1,30 @@
 import { defineConfig } from 'vitepress'
-import { readdirSync } from 'fs'
+import { readdirSync, watch } from 'fs'
 import { resolve } from 'path'
 
-// 自动扫描 posts 目录生成侧边栏
+// 缓存文章列表，dev 模式下监听文件变化自动刷新
+let _postsCache: { text: string; link: string }[] | null = null
+let _watcherReady = false
+
 function getPosts() {
-  // VitePress 构建时 cwd 就是项目根目录
   const postsDir = resolve('docs/posts')
-  return readdirSync(postsDir)
+  
+  // dev 模式：监听目录变化，自动清缓存
+  if (!_watcherReady && process.env.NODE_ENV !== 'production') {
+    watch(postsDir, { persistent: false }, () => { _postsCache = null })
+    _watcherReady = true
+  }
+  
+  if (_postsCache) return _postsCache
+  
+  _postsCache = readdirSync(postsDir)
     .filter(f => f.endsWith('.md') && f !== 'index.md')
     .map(f => ({
       text: f.replace('.md', ''),
       link: `/posts/${f.replace('.md', '')}`
     }))
+  
+  return _postsCache
 }
 
 export default defineConfig({

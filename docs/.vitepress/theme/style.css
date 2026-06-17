@@ -1,0 +1,44 @@
+/* ===== 博客主题样式 =====
+ *  随便改，改完 npm run build 看效果
+ *  注释掉的都是可选配色，去掉 /* */ 即可启用
+ */
+
+:root {
+  /* ---- 主色调 ---- */
+  --vp-c-brand-1: #646cff;
+  --vp-c-brand-2: #747bff;
+  --vp-c-brand-3: #535bf2;
+  
+  /* 换个清爽的蓝色试试？把上面三行换成下面这个 */
+  /* --vp-c-brand-1: #2d8cf0; */
+  /* --vp-c-brand-2: #5cadff; */
+  /* --vp-c-brand-3: #1870cc; */
+
+  /* ---- 首页 hero 标题 ---- */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+}
+
+/* ---- 这是暗色模式的配色 ---- */
+.dark {
+  --vp-c-brand-1: #a78bfa;
+  --vp-c-brand-2: #8b7fcf;
+  --vp-c-brand-3: #7c3aed;
+}
+
+/* ---- 自定义：代码块圆角 ---- */
+.vp-doc div[class*="language-"] {
+  border-radius: 8px;
+}
+
+/* ---- 自定义：文章图片加阴影 ---- */
+.vp-doc img {
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- 自定义：链接颜色 ---- */
+.vp-doc a {
+  text-decoration: none;
+  color: var(--vp-c-brand-1);
+}

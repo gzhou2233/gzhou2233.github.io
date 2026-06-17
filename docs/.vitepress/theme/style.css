@@ -10,9 +10,9 @@
   --vp-c-brand-3: #535bf2;
   
   /* 换个清爽的蓝色试试？把上面三行换成下面这个 */
-  /* --vp-c-brand-1: #2d8cf0; */
-  /* --vp-c-brand-2: #5cadff; */
-  /* --vp-c-brand-3: #1870cc; */
+  /* --vp-c-brand-1: #2d8cf0;
+     --vp-c-brand-2: #5cadff;
+     --vp-c-brand-3: #1870cc; */
 
   /* ---- 首页 hero 标题 ---- */
   --vp-home-hero-name-color: transparent;
@@ -41,4 +41,21 @@
 .vp-doc a {
   text-decoration: none;
   color: var(--vp-c-brand-1);
+}
+
+/* ---- 图片放大修复 ---- */
+.medium-zoom-overlay {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 999 !important;
+}
+/* 修复放大后的白色渐变残影 */
+.medium-zoom-image {
+  background: transparent !important;
+}
+.medium-zoom-image--opened {
+  background: transparent !important;
+  border-radius: 0 !important;
 }

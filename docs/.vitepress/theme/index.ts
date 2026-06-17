@@ -10,8 +10,10 @@ export default {
     const route = useRoute()
     
     const initZoom = () => {
-      // 给文章中所有图片加点击放大
-      mediumZoom('.vp-doc img', { background: 'rgba(0,0,0,0.8)' })
+      mediumZoom('.vp-doc img', {
+        background: 'rgba(0,0,0,0.85)',
+        margin: 24
+      })
     }
     
     onMounted(() => {

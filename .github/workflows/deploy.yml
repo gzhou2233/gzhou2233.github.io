@@ -2,7 +2,7 @@ name: Deploy VitePress Blog
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 permissions:
   contents: read
